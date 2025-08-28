@@ -16,7 +16,7 @@ func new_game():
 	$Player.start($StartPosition.position)
 	$StartTimer.start()
 	$HUD.update_score(score)
-	$HUD.show_message("Get Ready")
+	$HUD.show_message("Prepárate")
 	$Music.play()
 
 
@@ -26,15 +26,18 @@ func _on_mob_timer_timeout() -> void:
 	mob_spawn_location.progress_ratio = randf()
 	
 	mob.position = mob_spawn_location.position
-	
 	var direction = mob_spawn_location.rotation + PI / 2
-	
 	direction += randf_range(-PI / 4, PI / 4)
-	mob.rotation = direction
+	
+	const W := 480.0
+	const EPS := 1.0 
+	var from_right: bool = mob.position.x >= W - EPS
+	
+	if mob.has_node("AnimatedSprite2D"):
+		mob.get_node("AnimatedSprite2D").flip_h = from_right
 	
 	var velocity = Vector2(randf_range(150.0, 250.0), 0.0)
 	mob.linear_velocity = velocity.rotated(direction)
-	
 	add_child(mob)
 
 

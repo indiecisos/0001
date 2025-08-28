@@ -1,52 +1,47 @@
-[gd_scene load_steps=10 format=3 uid="uid://cgn0rep7qkxr0"]
+[gd_scene load_steps=9 format=3 uid="uid://cgn0rep7qkxr0"]
 
 [ext_resource type="Script" uid="uid://mjdniiakh6we" path="res://mob.gd" id="1_1qmh0"]
-[ext_resource type="Texture2D" uid="uid://dfs3lh3k7fcbr" path="res://art/enemyFlyingAlt_1.png" id="1_b3mxk"]
-[ext_resource type="Texture2D" uid="uid://by8ntfq2i0nn1" path="res://art/enemyFlyingAlt_2.png" id="2_1qmh0"]
-[ext_resource type="Texture2D" uid="uid://dy2cil7wnm8qw" path="res://art/enemySwimming_1.png" id="3_gfurk"]
-[ext_resource type="Texture2D" uid="uid://d2s0kcidue5uw" path="res://art/enemySwimming_2.png" id="4_ieysi"]
-[ext_resource type="Texture2D" uid="uid://dkls0u8q6uyf3" path="res://art/enemyWalking_1.png" id="5_cixyi"]
-[ext_resource type="Texture2D" uid="uid://li5lo37sdnu6" path="res://art/enemyWalking_2.png" id="6_7ulmv"]
+[ext_resource type="Texture2D" uid="uid://c4h2o1e7moydl" path="res://art/gruzzer.png" id="4_gfurk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ieysi"]
+atlas = ExtResource("4_gfurk")
+region = Rect2(0, 0, 105, 121)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cixyi"]
+atlas = ExtResource("4_gfurk")
+region = Rect2(105, 0, 105, 121)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7ulmv"]
+atlas = ExtResource("4_gfurk")
+region = Rect2(0, 121, 105, 121)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pcqmr"]
+atlas = ExtResource("4_gfurk")
+region = Rect2(105, 121, 105, 121)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_pcqmr"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_b3mxk")
+"texture": SubResource("AtlasTexture_ieysi")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_1qmh0")
+"texture": SubResource("AtlasTexture_cixyi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7ulmv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pcqmr")
 }],
 "loop": true,
-"name": &"fly",
-"speed": 3.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("3_gfurk")
-}, {
-"duration": 1.0,
-"texture": ExtResource("4_ieysi")
-}],
-"loop": true,
-"name": &"swim",
-"speed": 3.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("5_cixyi")
-}, {
-"duration": 1.0,
-"texture": ExtResource("6_7ulmv")
-}],
-"loop": true,
-"name": &"walk",
-"speed": 3.0
+"name": &"flying",
+"speed": 5.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jbnni"]
-radius = 36.9885
-height = 102.022
+radius = 35.0
+height = 72.0
 
 [node name="Mob" type="RigidBody2D" groups=["mobs"]]
 collision_mask = 0
@@ -57,10 +52,14 @@ metadata/_edit_group_ = true
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.75, 0.75)
 sprite_frames = SubResource("SpriteFrames_pcqmr")
-animation = &"walk"
+animation = &"flying"
+frame_progress = 0.125307
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_jbnni")
 
 [node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(-17.75, -17.75)
+scale = Vector2(1.825, 1.825)
+rect = Rect2(-10, -10, 40, 40)
